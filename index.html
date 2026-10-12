@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crimson Reel — Movie Review Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">◎</span>
+        <span class="brand-name">CRIMSON<em>REEL</em></span>
+      </div>
+
+      <nav class="side-nav" id="sideNav">
+        <button class="side-link active" data-view="all">
+          <span class="side-ico">▤</span> All Films
+        </button>
+        <button class="side-link" data-view="top">
+          <span class="side-ico">★</span> Top Rated
+        </button>
+        <button class="side-link" data-view="favourites">
+          <span class="side-ico">♥</span> Favourites
+        </button>
+        <button class="side-link" data-view="watchlater">
+          <span class="side-ico">⏱</span> Watch Later
+        </button>
+      </nav>
+
+      <div class="side-section">
+        <p class="side-heading">Recent Activity</p>
+        <ul class="activity-list" id="activityList"></ul>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+      <header class="topbar">
+        <div class="search-wrap">
+          <span class="search-ico">⌕</span>
+          <input type="text" id="searchInput" placeholder="Search title or director…" autocomplete="off" />
+        </div>
+        <button class="btn btn-solid" id="openAddMovie">+ Add a Film</button>
+      </header>
+
+      <section class="content-head">
+        <div>
+          <h1 class="section-title" id="sectionTitle">All Films</h1>
+          <p class="section-sub" id="sectionSub">Everything currently on the reel.</p>
+        </div>
+        <div class="content-controls">
+          <div class="chip-row" id="genreChips"></div>
+          <select id="sortSelect" class="sort-select">
+            <option value="rating-desc">Highest rated</option>
+            <option value="rating-asc">Lowest rated</option>
+            <option value="year-desc">Newest first</option>
+            <option value="year-asc">Oldest first</option>
+            <option value="title-asc">Title A–Z</option>
+            <option value="reviews-desc">Most reviewed</option>
+          </select>
+        </div>
+      </section>
+
+      <main>
+        <section class="grid" id="movieGrid"></section>
+        <p class="empty-state" id="emptyState" hidden></p>
+      </main>
+    </div>
+  </div>
+
+  <!-- MOVIE DETAIL MODAL -->
+  <div class="modal-backdrop" id="detailBackdrop" hidden>
+    <div class="modal detail-modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="closeDetail" aria-label="Close">✕</button>
+      <div class="detail-head">
+        <div class="detail-poster" id="detailPoster"></div>
+        <div class="detail-info">
+          <p class="detail-genre" id="detailGenre"></p>
+          <h2 id="detailTitle"></h2>
+          <p class="detail-meta" id="detailMeta"></p>
+          <p class="detail-desc" id="detailDesc"></p>
+          <div class="reel-gauge-wrap" id="detailGaugeWrap"></div>
+        </div>
+      </div>
+
+      <div class="detail-body">
+        <h3 class="section-label">Write a Review</h3>
+        <form id="reviewForm" class="review-form">
+          <div class="form-row">
+            <input type="text" id="reviewerName" placeholder="Your name" required maxlength="40" />
+            <div class="star-input" id="starInput" data-value="0">
+              <span data-star="1">★</span><span data-star="2">★</span><span data-star="3">★</span><span data-star="4">★</span><span data-star="5">★</span>
+            </div>
+          </div>
+          <textarea id="reviewText" placeholder="What did you make of it?" required maxlength="500" rows="3"></textarea>
+          <button type="submit" class="btn btn-solid full">Submit Review</button>
+        </form>
+
+        <h3 class="section-label">Audience Reviews (<span id="reviewCount">0</span>)</h3>
+        <ul class="review-list" id="reviewList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD MOVIE MODAL -->
+  <div class="modal-backdrop" id="addBackdrop" hidden>
+    <div class="modal add-modal" role="dialog" aria-modal="true">
+      <button class="modal-close" id="closeAdd" aria-label="Close">✕</button>
+      <h3 class="section-label">Add a Film to the Reel</h3>
+      <form id="addMovieForm" class="add-form">
+        <input type="text" id="newTitle" placeholder="Title" required maxlength="60" />
+        <div class="form-row two-col">
+          <input type="number" id="newYear" placeholder="Year" required min="1888" max="2100" />
+          <select id="newGenre" required>
+            <option value="" disabled selected>Genre</option>
+            <option>Drama</option>
+            <option>Thriller</option>
+            <option>Sci-Fi</option>
+            <option>Horror</option>
+            <option>Comedy</option>
+            <option>Romance</option>
+            <option>Animation</option>
+            <option>Action</option>
+          </select>
+        </div>
+        <input type="text" id="newDirector" placeholder="Director" required maxlength="50" />
+        <textarea id="newDesc" placeholder="One-line synopsis" required maxlength="200" rows="2"></textarea>
+        <button type="submit" class="btn btn-solid full">Add to the Reel</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
